@@ -22,7 +22,7 @@
 			<td>{{$user->roles->implode('name', ',')}}</td>
 			<td>
 			<a href="{{url('/usuarios/'.$user->id.'/edit')}}" class="btn btn-primary">Update</a>
-			<a href="#" class="btn btn-danger">Destroy</a>
+			@include('usuarios.delete',['user'=>$user])
 			</td>
 		</tr>
 		@endforeach

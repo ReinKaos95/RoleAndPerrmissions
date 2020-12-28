@@ -115,6 +115,19 @@ Cosmic Void - Sxuperion*/
      */
     public function destroy($id)
     {
-        //
+       $users=User::findOrFail($id);
+       #eliminar role
+       $users->removeRole($users->roles->implode('name', ','));
+
+       #eliminar usuario
+        if ($users->delete()) {
+       return redirect('/usuarios');
+   }
+       else{
+        return response()->json([
+            'mensaje'=>'error al eliminar usuario'
+        ]);
+       }
+       }
     }
-}
+
