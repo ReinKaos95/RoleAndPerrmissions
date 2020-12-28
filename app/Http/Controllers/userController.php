@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Spatie\Permission\Models\Role;
-
 class userController extends Controller
 {
     /**
@@ -15,7 +14,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $users=User::all();
+         $users=User::all();
       return view('usuarios.index', compact('users'));
     }
 
@@ -39,15 +38,14 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-       $usuarios = new User;
+         $usuarios = new User;
        $usuarios->name = $request->name;
        $usuarios->email = $request->email;
        $usuarios->password = bcrypt($request->password);
        if ($usuarios->save()) {
        $usuarios->assignRole($request->role);
        return redirect('/usuarios');
-       }
-
+       } 
     }
 
     /**
@@ -58,12 +56,7 @@ class userController extends Controller
      */
     public function show($id)
     {
-        /*
-
-
-Nether Tombs of Abaddon - PROCLAMATION
-End Times - DEATH WORSHIP
-Cosmic Void - Sxuperion*/
+        //
     }
 
     /**
@@ -74,7 +67,7 @@ Cosmic Void - Sxuperion*/
      */
     public function edit($id)
     {
-        $users=User::findOrFail($id);
+      $users=User::findOrFail($id);
 
         //obtencion de roles
         $roles=Role::all()->pluck('name', 'id');
@@ -93,18 +86,16 @@ Cosmic Void - Sxuperion*/
     {
        $users=User::findOrFail($id);
 
-       $usuarios->name = $request->name;
-       $usuarios->email = $request->email;
-       if ($usuarios->password != null) {
-       $usuarios->password = $request->password;
+       $users->name = $request->name;
+       $users->email = $request->email;
+       if ($users->password != null) {
+       $users->password = $request->password;
        }
-       $usuarios->syncRoles($request->role);
+       $users->syncRoles($request->role);
        
-       $usuarios->save();
+       $users->save();
        
        return redirect('/usuarios');
-
-
     }
 
     /**
@@ -115,7 +106,7 @@ Cosmic Void - Sxuperion*/
      */
     public function destroy($id)
     {
-       $users=User::findOrFail($id);
+           $users=User::findOrFail($id);
        #eliminar role
        $users->removeRole($users->roles->implode('name', ','));
 
@@ -128,6 +119,5 @@ Cosmic Void - Sxuperion*/
             'mensaje'=>'error al eliminar usuario'
         ]);
        }
-       }
     }
-
+}

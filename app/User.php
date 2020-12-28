@@ -10,7 +10,8 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use Notifiable;
-     use HasRoles;
+
+      use HasRoles;
     /**
      * The attributes that are mass assignable.
      *
@@ -38,11 +39,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //actualizar contraseñas
-    public function setPasswordAttribute($value)
+public function setPasswordAttribute($value)
     {
-        if (empty($value)) {
+        if (!empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
 }
+ 

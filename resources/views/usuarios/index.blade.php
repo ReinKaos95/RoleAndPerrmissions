@@ -21,16 +21,22 @@
 			<td>{{$user->email}}</td>
 			<td>{{$user->roles->implode('name', ',')}}</td>
 			<td>
+				@role('editor')
 			<a href="{{url('/usuarios/'.$user->id.'/edit')}}" class="btn btn-primary">Update</a>
+			@endrole
+			@role('super-admin')
 			@include('usuarios.delete',['user'=>$user])
+			@endrole
 			</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
+@role('super-admin')
 <div class="row justify-content-end pb-2">
 	<a a href="{{url('/usuarios/create')}}" class="btn btn-success">Register</a>
 </div>
+@endrole
 			</div>
 		</div>
 	</div>

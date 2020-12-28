@@ -21,10 +21,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+ public function index()
     {
         //obtener usuario registrado
-        $user=Auth::user();
+        $user=Auth::User();
         //obtener rol de usuario
         $rol=$user->roles->implode('name', ',');
         switch ($rol) {
@@ -41,6 +41,5 @@ class HomeController extends Controller
              return view('home', compact('saludo'));
                 break;
         }
-
-    }
 }
+}       
