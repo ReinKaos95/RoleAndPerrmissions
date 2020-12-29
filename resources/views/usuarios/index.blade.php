@@ -21,22 +21,22 @@
 			<td>{{$user->email}}</td>
 			<td>{{$user->roles->implode('name', ',')}}</td>
 			<td>
-				@role('editor')
+			@can('update user')
 			<a href="{{url('/usuarios/'.$user->id.'/edit')}}" class="btn btn-primary">Update</a>
-			@endrole
-			@role('super-admin')
+			@endcan
+			@can('delete user')
 			@include('usuarios.delete',['user'=>$user])
-			@endrole
+			@endcan
 			</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
-@role('super-admin')
+@can('create user')
 <div class="row justify-content-end pb-2">
 	<a a href="{{url('/usuarios/create')}}" class="btn btn-success">Register</a>
 </div>
-@endrole
+@endcan
 			</div>
 		</div>
 	</div>
