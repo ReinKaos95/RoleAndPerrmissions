@@ -7,6 +7,16 @@ use App\User;
 use Spatie\Permission\Models\Role;
 class userController extends Controller
 {
+
+  //constructor proteccion de controlador
+
+  public function __construct()
+  {
+        $this->middleware(['permission:create user'],['only' =>['create', 'store']]);
+         $this->middleware(['permission:read users'],['only' =>['index']]);
+          $this->middleware(['permission:update user'],['only' =>['edit', 'update']]);
+           $this->middleware(['permission:delete user'],['only' =>['delete']]);
+  }
     /**
      * Display a listing of the resource.
      *

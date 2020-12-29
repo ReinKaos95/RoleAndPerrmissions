@@ -24,21 +24,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['role:super-admin|editor|moderator']], function () {
     Route::resource('usuarios', 'userController');
 });
-
-
-
-Route::group(['middleware' => ['permission:publish articles']], function () {
-    //
-});
-
-Route::group(['middleware' => ['role:super-admin','permission:publish articles']], function () {
-    //
-});
-
-Route::group(['middleware' => ['role_or_permission:super-admin|edit articles']], function () {
-    //
-});
-
-Route::group(['middleware' => ['role_or_permission:publish articles']], function () {
-    //
-});
